@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import Login from "./Login";
 import UserList from "../components/UserList";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,Link } from "react-router-dom";
 
 const Dashboard = () => {
   const navigate = useNavigate();

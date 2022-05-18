@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
+
+import { BsPeopleFill } from "react-icons/bs";
 
 const Header = () => {
   const [signed, setSigned] = useState(localStorage.getItem("username"));
@@ -14,20 +17,34 @@ const Header = () => {
   };
   return (
     <div className="header">
-      {" "}
-      <h4>Employee register App</h4>
-      {
-        //checks if signed with help of local storage, if values are not there redirects
-      }
-      {signed && (
-        <div className="buttonsHeader">
-          <button onClick={gotoDash}>Go to Dashboard</button>
-          <button color="default" disableElevation onClick={signOut}>
-            Sign out
-          </button>
-          <p color="textSecondary">hello {signed}</p>
+      <nav className="navbar bg-dark">
+        <div>
+          <a href="/dashboard">
+            <BsPeopleFill style={{ fontSize: "2rem", marginRight: "0.3rem" }} />
+            Employee registry App
+          </a>
+
+          <small color="textSecondary">hello {signed}</small>
         </div>
-      )}
+
+        {
+          //checks if signed with help of local storage, if values are not there redirects
+        }
+        {signed && (
+          <ul>
+            <li>
+              {" "}
+              <a onClick={gotoDash}>Go to Dashboard</a>
+            </li>
+            <li>
+              {" "}
+              <a color="default" onClick={signOut}>
+                Sign out
+              </a>
+            </li>
+          </ul>
+        )}
+      </nav>
     </div>
   );
 };

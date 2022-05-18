@@ -14,7 +14,7 @@ const Dashboard = () => {
   return (
     <div>
       {/*TODO: remove ! when authorization complete*/}
-      {!localStorage.getItem("username") ? (
+      {localStorage.getItem("username") ? (
         <div>
           <h3 variant="h3" color="textSecondary">
             Dashboard

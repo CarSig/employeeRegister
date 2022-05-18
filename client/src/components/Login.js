@@ -25,6 +25,7 @@ const Login = () => {
       method: "POST",
       data: payload,
     });
+
     const data = await response;
     console.log(data);
 

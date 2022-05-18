@@ -46,7 +46,9 @@ const Register = () => {
         alert("Registration was succesfull");
       })
       .catch((error) => {
+        console.log(payload);
         console.log(error);
+        
       });
   };
 

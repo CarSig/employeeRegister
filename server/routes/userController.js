@@ -43,6 +43,7 @@ exports.register = async (req, res) => {
   console.log("Body: ", req.body);
   const data = req.body;
   const newUser = new User(data);
+ 
 
   // . save()
   await newUser.save((error) => {

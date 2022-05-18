@@ -8,7 +8,8 @@ const path = require("path");
 const app = express();
 const routes = require("./routes/api");
 
-const PORT = process.env.PORT || 8080;
+const PORT = 8080;
+// const PORT = process.env.PORT || 8080;
 const MONGODB_URI = process.env.MONGODB_URI;
 
 //connection to database

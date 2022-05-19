@@ -16,31 +16,29 @@ function App() {
     <div className="App">
       {" "}
       <Header />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" exact element={<Dashboard />}>
+            {" "}
+          </Route>
+          <Route path="/login" exact element={<Login />}>
+            {" "}
+          </Route>
+          <Route path="/register" exact element={<Register />}>
+            {" "}
+          </Route>
+          <Route path="/comment" exact element={<Comment />}>
+            {" "}
+          </Route>
+          <Route path="/dashboard" exact element={<Dashboard />}>
+            {" "}
+          </Route>
+          <Route path="/users/:id" element={<UserDetails />}>
+            {" "}
+          </Route>
+        </Routes>
+      </BrowserRouter>
       <Landing />
-      {/*
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" exact element={<Dashboard />}>
-              {" "}
-            </Route>
-            <Route path="/login" exact element={<Login />}>
-              {" "}
-            </Route>
-            <Route path="/register" exact element={<Register />}>
-              {" "}
-            </Route>
-            <Route path="/comment" exact element={<Comment />}>
-              {" "}
-            </Route>
-            <Route path="/dashboard" exact element={<Dashboard />}>
-              {" "}
-            </Route>
-            <Route path="/users/:id" element={<UserDetails />}>
-              {" "}
-            </Route>
-          </Routes>
-        </BrowserRouter>
-  */}
     </div>
   );
 }

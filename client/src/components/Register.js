@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 
+import { BsPersonPlusFill } from "react-icons/bs";
+
 const Register = () => {
   const [values, setValues] = useState({
     username: "",
@@ -48,44 +50,50 @@ const Register = () => {
       .catch((error) => {
         console.log(payload);
         console.log(error);
-        
       });
   };
 
   return (
-    <div>
-      <h1>{signedUser === null ? "Registration" : "Add new user"}</h1>
-      <form onSubmit={handleSubmit}>
-        <div className="form-input">
-          <input type="text" name="username" placeholder="username" value={values.username} onChange={handleChange("username")} />
+    <section className="container">
+      <h1 className="large text-primary">{signedUser === null ? "Registration" : "Add new user"}</h1>
+      <p className="lead">
+        <BsPersonPlusFill />
+        Create new account{" "}
+      </p>
+      <form className="form" onSubmit={handleSubmit}>
+        <div className="form-group">
+          <input type="text" name="username" placeholder="username" value={values.username} onChange={handleChange("username")} required />
         </div>
-        <div className="form-input">
-          <input type="email" name="email" placeholder="email" value={values.email} onChange={handleChange("email")} />
+        <div className="form-group">
+          <input type="email" name="email" placeholder="email" value={values.email} onChange={handleChange("email")} required />
         </div>
-        <div className="form-input">
+        <div className="form-group">
           <input type="text" name="firstName" placeholder="firstName" value={values.firstName} onChange={handleChange("firstName")} />
         </div>
-        <div className="form-input">
+        <div className="form-group">
           <input type="text" name="lastName" placeholder="lastName" value={values.lastName} onChange={handleChange("lastName")} />
         </div>
-        <div className="form-input">
+        <div className="form-group">
           <input type="text" name="address" placeholder="address" value={values.address} onChange={handleChange("address")} />
         </div>{" "}
-        <div className="form-input">
+        <div className="form-group">
           <input type="text" name="role" placeholder="role" value={values.role} onChange={handleChange("role")} />
-          <br />
-          <input type="password" name="password" placeholder="password" value={values.password} onChange={handleChange("password")} />
+          <div className="form-group">
+            <input type="password" name="password" placeholder="password" value={values.password} onChange={handleChange("password")} />
+          </div>
         </div>
-        <button>Submit</button>
+        <input type="submit" value="Submit" className="btn btn-primary" />
+        {/*<button>Submit</button>*/}
       </form>
       {signedUser === null && (
         <div>
           {" "}
-          <p>Already have an account?</p>
-          <Link to="/login">Sign in</Link>
+          <p className="my-1">
+            Already have an account? <Link to="/login"> Sign in</Link>
+          </p>
         </div>
       )}
-    </div>
+    </section>
   );
 };
 

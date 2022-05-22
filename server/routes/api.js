@@ -16,3 +16,4 @@ router.get("/comments", commentController.getAllPosts);
 router.post("/comment", commentController.postComment);
 
 module.exports = router;
+

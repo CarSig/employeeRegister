@@ -18,32 +18,37 @@ const UserList = () => {
   }, []);
 
   return (
-    <div>
-      <h4 variant="h4" color="textSecondary">
-        Employee list
-      </h4>
-      <p>click on employee field to go on personal details page</p>
-      <ul>
-        {users.map((employee) => {
-          return (
-            <li key={employee._id}>
-              <a href={`users/${employee._id}`}>
-                <div>
-                  {" "}
-                  <p>{employee.username}</p>
-                </div>
+    <section className="container">
+      <h1 className="large text-primary">Employee list</h1>
 
-                <p>
-                  {employee.firstname} {employee.lastName}
-                </p>
-                <p color="textSecondary">{employee.email}</p>
-                <p color="textSecondary">{employee.role}</p>
-              </a>
-            </li>
-          );
-        })}
-      </ul>
-    </div>
+      <p className="lead">Employee list</p>
+      <div className="profiles">
+        <ul>
+          {users.map((employee) => {
+            return (
+              <li className="profile bg-light" key={employee._id}>
+                <img
+                  className="round-img"
+                  src={`https://randomuser.me/api/portraits/${employee.gender === "male" ? "men" : "women"}/${employee.imgNumber}.jpg`}
+                />
+                <div className="my-1">
+                  {" "}
+                  <p className="text-primary lead">{employee.username}</p>
+                  <p>
+                    {employee.firstname} {employee.lastName}
+                  </p>
+                  <p color="textSecondary">{employee.email}</p>
+                  <p color="textSecondary">{employee.role}</p>
+                  <a href={`users/${employee._id}`} className="btn btn-primary">
+                    View Profile
+                  </a>
+                </div>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+    </section>
   );
 };
 

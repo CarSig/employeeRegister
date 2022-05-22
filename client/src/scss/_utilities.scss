@@ -29,6 +29,13 @@
   color: $primary-color;
 }
 
+.round-img {
+  border-radius: 50%;
+  margin-left: 2rem;
+  //   min-width: 110%;
+  border: solid 1px $primary-color;
+}
+
 //Backgrounds
 .bg {
   &-primary {

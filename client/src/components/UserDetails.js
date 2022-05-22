@@ -3,6 +3,9 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 import UpdateUser from "./UpdateUser";
+import Comment from "./Comment";
+
+import { getUser, testFunction } from "./functions";
 
 const UserDetails = () => {
   const navigate = useNavigate();
@@ -39,8 +42,10 @@ const UserDetails = () => {
     axios.delete(`/api/users/${getID}`).then((res) => console.log("Deleted Sucessfully"));
     navigate("/dashboard");
   };
-  const updateUserFunc = () => {
-    axios.patch(`/api/users/${getID}`, { user }).then((res) => console.log("updated sucessfully"));
+  const updateUserFunc = (e) => {
+    e.preventDefault();
+
+    axios.put(`/api/users/${getID}`, { user }).then((res) => console.log("updated sucessfully"));
   };
 
   const handleChange = (input) => (e) => {
@@ -48,8 +53,8 @@ const UserDetails = () => {
     console.log(user);
   };
 
-  const handleCommentChange = (input) => (e) => {
-    setComment({ author: localStorage.getItem("username"), targetID: user._id, [input]: e.target.value });
+  const handleCommentChange = () => (e) => {
+    setComment({ author: localStorage.getItem("username"), targetID: user._id, text: e.target.value });
     console.log(comment);
   };
 
@@ -64,13 +69,9 @@ const UserDetails = () => {
       url: "/api/comment",
       method: "POST",
       data: payload,
-    })
-      .then(() => {
-        alert("comment saved");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    }).catch((error) => {
+      console.log(error);
+    });
     window.location.reload();
   };
 
@@ -105,88 +106,91 @@ const UserDetails = () => {
     setUpdateReady(!updateReady);
   };
 
-  const convertDate = (timestamp) => {
-    const date = new Date(timestamp);
-    const convertedDate = `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`;
-    return convertedDate;
-  };
-
   return (
-    <div>
-      <h4>User Details</h4>
+    <section className="container ">
+      <h3>{testFunction("test")}</h3>
+      <h1 className="large text-primary">{user.username}</h1>
 
-      <div>
-        <div style={{ display: "flex" }}>
-          <div style={{ marginRight: "30px" }}>
-            <p color="textSecondary">Username</p>
-            <p color="textSecondary">Email</p>
-            <p color="textSecondary">First Name</p>
-            <p color="textSecondary">Last Name</p>
-            <p color="textSecondary">Address</p>
-            <p color="textSecondary">Role</p>
+      <div className="profile-grid my-1">
+        <div className="profile-top bg-primary p-2">
+          <img className="round-img" src={`https://randomuser.me/api/portraits/${user.gender === "male" ? "men" : "women"}/${user.imgNumber}.jpg`} />
+          <div style={{ display: "flex" }}>
+            <div style={{ marginRight: "30px" }}>
+              <p color="textSecondary">Username</p>
+              <p color="textSecondary">Email</p>
+              <p color="textSecondary">First and Last Name</p>
+
+              <p color="textSecondary">Address</p>
+              <p color="textSecondary">Role</p>
+            </div>
+            <div>
+              <p color="textPrimary">{user.username}</p>
+              <p color="textPrimary">{user.email}</p>
+              <p color="textPrimary">
+                {user.firstName} {user.lastName}
+              </p>
+
+              <p color="textPrimary">{user.address}</p>
+              <p color="textPrimary">{user.role}</p>
+            </div>
           </div>
-          <div>
-            <p color="textPrimary">{user.username}</p>
-            <p color="textPrimary">{user.email}</p>
-            <p color="textPrimary">{user.firstName}</p>
-            <p color="textPrimary">{user.lastName}</p>
-            <p color="textPrimary">{user.address}</p>
-            <p color="textPrimary">{user.role}</p>
-          </div>
+        </div>
+        <div className="profile-about bg-light p-2">
+          <h2 className="text-primary">{user.firstName}'s Bio</h2>
+          <p>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Facilis distinctio magnam reprehenderit pariatur optio culpa libero odio at odit tempore!
+          </p>
+          <div className="line"></div>
+          <h2 className="text-primary"></h2>
         </div>
       </div>
 
-      <br></br>
-      <br></br>
-      <button variant="contained" color="primary" onClick={toggleReady}>
+      <button className="btn btn-primary" onClick={toggleReady}>
         {updateReady ? "Cancel" : "Update User"}
       </button>
-      <br></br>
-      <br></br>
+
       {updateReady && (
         <UpdateUser user={user} setUser={setUser} handleChange={handleChange} params={params} getID={getID} updateUserFunc={updateUserFunc}></UpdateUser>
       )}
 
-      <button variant="contained" color="primary" onClick={deleteUser}>
-        Delete User
-      </button>
-      <br></br>
-      <br></br>
-      <div>
+      <button onClick={deleteUser} className="btn btn-danger">
         {" "}
-        <form style={{ border: "solid 1px black", marginTop: "20px" }}>
+        Delete User{" "}
+      </button>
+
+      <div className="form bg-light p-1">
+        <form>
+          <div className="form-group"></div>
+
           <p color="textSecondary">Add comment</p>
 
-          <textarea> </textarea>
+          <textarea className="py-2" onChange={handleCommentChange()}>
+            {" "}
+          </textarea>
 
-          <br />
-          <br />
-
-          <button onClick={submitComment}>Submit Comment</button>
+          <div />
+          <button className="btn btn-dark" onClick={submitComment}>
+            Submit Comment
+          </button>
         </form>
       </div>
 
       <div>
-        <h6>Comments</h6>
+        <section className="container">
+          <h4 className="text-primary lead"> Comments</h4>
 
-        {posts
-          .filter((post) => {
-            const filteredPost = post.targetID === user._id;
-            return filteredPost;
-          })
-          .reverse()
-          .map((post) => {
-            return (
-              <div key={post._id}>
-                <p>
-                  submited by {post.author} at date {convertDate(+post.date)}{" "}
-                </p>
-                <p color="textPrimary">{post.text}</p>
-              </div>
-            );
-          })}
+          {posts
+            .filter((post) => {
+              const filteredPost = post.targetID === user._id;
+              return filteredPost;
+            })
+            .reverse()
+            .map((post) => {
+              return <Comment key={post._id} author={post.author} date={post.date} text={post.text} _id={post._id} />;
+            })}
+        </section>
       </div>
-    </div>
+    </section>
   );
 };
 

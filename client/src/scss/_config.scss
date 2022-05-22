@@ -33,7 +33,7 @@ $spaceamounts: (1, 2, 3, 4, 5);
   }
   //All around padding
   .p-#{$space} {
-    margin: #{$space}rem;
+    padding: #{$space}rem;
   }
   //Vertical padding
   .py-#{$space} {

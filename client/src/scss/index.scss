@@ -72,3 +72,14 @@ ul {
     text-align: center;
   }
 }
+
+//User List
+.profile {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  grid-gap: 10rem;
+  align-items: center;
+  padding: 1rem;
+  line-height: 1.8;
+  margin-bottom: 1rem;
+}

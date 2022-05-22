@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import Login from "./Login";
 import UserList from "../components/UserList";
-import { useNavigate,Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -12,7 +12,7 @@ const Dashboard = () => {
   };
 
   return (
-    <div>
+    <section className="dashboard">
       {/*TODO: remove ! when authorization complete*/}
       {localStorage.getItem("username") ? (
         <div>
@@ -29,7 +29,7 @@ const Dashboard = () => {
       ) : (
         <Login></Login>
       )}
-    </div>
+    </section>
   );
 };
 

@@ -3,8 +3,8 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const UserSchema = new Schema(
   {
-    username: { type: String, required: true, min: 3, max: 20 },
-    email: { type: String, required: true, max: 50 },
+    username: { type: String, required: true, min: 3, max: 20, unique: true },
+    email: { type: String, required: true, max: 50, unique: true },
     lastName: { type: String, default: "Default Surname" },
     firstName: { type: String, default: "Default Name" },
     address: { type: String, default: "Default Address" },
@@ -12,6 +12,8 @@ const UserSchema = new Schema(
     password: { type: String, required: true, min: 6 },
     comments: { type: Array, default: [] },
     isAdmin: { type: Boolean, default: false },
+    imgNumber: { type: Number },
+    gender: { type: String },
     date: {
       type: String,
       default: Date.now(),

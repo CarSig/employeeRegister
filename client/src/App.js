@@ -14,13 +14,9 @@ import UserList from "./components/UserList";
 function App() {
   return (
     <div className="App">
-      {" "}
       <Header />
       <BrowserRouter>
         <Routes>
-          <Route path="/" exact element={<Dashboard />}>
-            {" "}
-          </Route>
           <Route path="/login" exact element={<Login />}>
             {" "}
           </Route>
@@ -38,6 +34,7 @@ function App() {
           </Route>
         </Routes>
       </BrowserRouter>
+
       <Landing />
     </div>
   );

@@ -39,12 +39,11 @@ app.use(morgan("tiny"));
 //routing
 app.use("/api", routes);
 
-// //Serve static assets if in production
-// if (process.env.NODE_ENV === "production") {
-//   //Set Static folder -- mozda sa ../
-//   app.use(express.static("client/build"));
+//Serve static assets if in production
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
 
-//   app.get("*", (req, res) => {
-//     res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
-//   });
-// }
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  });
+}

@@ -15,27 +15,26 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/login" exact element={<Login />}>
-            {" "}
-          </Route>
-          <Route path="/register" exact element={<Register />}>
-            {" "}
-          </Route>
-          <Route path="/comment" exact element={<Comment />}>
-            {" "}
-          </Route>
-          <Route path="/dashboard" exact element={<Dashboard />}>
-            {" "}
-          </Route>
-          <Route path="/users/:id" element={<UserDetails />}>
-            {" "}
-          </Route>
-        </Routes>
-      </BrowserRouter>
 
-      <Landing />
+      {localStorage.getItem("username") ? (
+        <BrowserRouter>
+          <Routes>
+            <Route path="/login" exact element={<Login />} />
+            <Route path="/register" exact element={<Register />} />
+            <Route path="/comment" exact element={<Comment />} />
+            <Route path="/users/:id" element={<UserDetails />} />
+            <Route path="/" element={<Dashboard />} />
+          </Routes>
+        </BrowserRouter>
+      ) : (
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" exact element={<Landing />} />
+            <Route path="/login" exact element={<Login />} />
+            <Route path="/register" exact element={<Register />} />
+          </Routes>
+        </BrowserRouter>
+      )}
     </div>
   );
 }

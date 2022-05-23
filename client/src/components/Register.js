@@ -48,8 +48,8 @@ const Register = () => {
     })
       .then(() => {
         console.log("Data has been sent to the server");
-        signedUser === null ? navigate("/login") : navigate("/dashboard");
-        alert("Registration was succesfull");
+        signedUser === null ? navigate("/login") : navigate("/");
+        alert("Registration was successful");
       })
       .catch((error) => {
         console.log(payload);

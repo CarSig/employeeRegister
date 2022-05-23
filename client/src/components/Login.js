@@ -39,7 +39,7 @@ const Login = () => {
       console.log(data.data.user);
 
       setInvalidCredentials(false);
-      window.location.href = "/dashboard";
+      window.location.href = "/";
     } else {
       setInvalidCredentials(true);
     }

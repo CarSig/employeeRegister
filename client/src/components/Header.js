@@ -13,13 +13,13 @@ const Header = () => {
   };
 
   const gotoDash = () => {
-    window.location.href = "/dashboard";
+    window.location.href = "/";
   };
   return (
     <div className="header">
       <nav className="navbar bg-dark">
         <div>
-          <a href="/dashboard">
+          <a href="/">
             <BsPeopleFill style={{ fontSize: "2rem", marginRight: "0.3rem" }} />
             Employee registry App
           </a>

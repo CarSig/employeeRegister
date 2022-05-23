@@ -5,8 +5,6 @@ import axios from "axios";
 import UpdateUser from "./UpdateUser";
 import Comment from "./Comment";
 
-import { getUser, testFunction } from "./functions";
-
 const UserDetails = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState({
@@ -26,7 +24,7 @@ const UserDetails = () => {
     text: "",
   });
   const [posts, setPosts] = useState([]);
-  const [edit, setEdit] = useState(false);
+
   const [updateReady, setUpdateReady] = useState(false);
 
   const params = useParams();
@@ -40,7 +38,7 @@ const UserDetails = () => {
 
   const deleteUser = () => {
     axios.delete(`/api/users/${getID}`).then((res) => console.log("Deleted Sucessfully"));
-    navigate("/dashboard");
+    navigate("/");
   };
   const updateUserFunc = (e) => {
     e.preventDefault();
@@ -108,10 +106,9 @@ const UserDetails = () => {
 
   return (
     <section className="container ">
-      <h3>{testFunction("test")}</h3>
-      <h1 className="large text-primary">{user.username}</h1>
+      <h1 className="large text-primary ">{user.username}</h1>
 
-      <div className="profile-grid my-1">
+      <div className="profile-grid my-4">
         <div className="profile-top bg-primary p-2">
           <img className="round-img" src={`https://randomuser.me/api/portraits/${user.gender === "male" ? "men" : "women"}/${user.imgNumber}.jpg`} />
           <div style={{ display: "flex" }}>
@@ -145,7 +142,7 @@ const UserDetails = () => {
         </div>
       </div>
 
-      <button className="btn btn-primary" onClick={toggleReady}>
+      <button className="btn btn-primary " onClick={toggleReady}>
         {updateReady ? "Cancel" : "Update User"}
       </button>
 
@@ -153,27 +150,30 @@ const UserDetails = () => {
         <UpdateUser user={user} setUser={setUser} handleChange={handleChange} params={params} getID={getID} updateUserFunc={updateUserFunc}></UpdateUser>
       )}
 
-      <button onClick={deleteUser} className="btn btn-danger">
+      <button onClick={deleteUser} className="btn btn-danger m-2">
         {" "}
         Delete User{" "}
       </button>
 
-      <div className="form bg-light p-1">
-        <form>
-          <div className="form-group"></div>
+      {localStorage.getItem("username") === user.username ? null : (
+        <div>
+          {" "}
+          <div className="form bg-light my-2 p-1">
+            <form>
+              <div className="form-group"></div>
 
-          <p color="textSecondary">Add comment</p>
+              <p color="textSecondary">Add comment</p>
 
-          <textarea className="py-2" onChange={handleCommentChange()}>
-            {" "}
-          </textarea>
+              <textarea className="py-2" onChange={handleCommentChange()} placeholder={"your comment..."}></textarea>
 
-          <div />
-          <button className="btn btn-dark" onClick={submitComment}>
-            Submit Comment
-          </button>
-        </form>
-      </div>
+              <div />
+              <button className="btn btn-dark" onClick={submitComment}>
+                Submit Comment
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
 
       <div>
         <section className="container">

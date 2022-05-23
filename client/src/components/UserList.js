@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Login from "./Login";
+import { useNavigate, Link } from "react-router-dom";
 
 const UserList = () => {
   const [users, setUsers] = useState([]);
@@ -17,9 +19,19 @@ const UserList = () => {
       });
   }, []);
 
+  const navigate = useNavigate();
+
+  const addNewUser = () => {
+    window.location.href = "/register";
+  };
+
   return (
     <section className="container">
-      <h1 className="large text-primary">Employee list</h1>
+      <h1 className="large text-primary">Dashboard </h1>
+
+      <button className="btn btn-success my-2" onClick={addNewUser}>
+        Add New User
+      </button>
 
       <p className="lead">Employee list</p>
       <div className="profiles">
@@ -35,7 +47,7 @@ const UserList = () => {
                   {" "}
                   <p className="text-primary lead">{employee.username}</p>
                   <p>
-                    {employee.firstname} {employee.lastName}
+                    {employee.firstName} {employee.lastName}
                   </p>
                   <p color="textSecondary">{employee.email}</p>
                   <p color="textSecondary">{employee.role}</p>

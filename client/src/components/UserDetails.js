@@ -84,6 +84,7 @@ const UserDetails = () => {
       .catch((err) => {
         console.log(err);
       });
+    return user;
   };
 
   const getPosts = async () => {
@@ -110,7 +111,7 @@ const UserDetails = () => {
 
       <div className="profile-grid my-4">
         <div className="profile-top bg-primary p-2">
-          <img className="round-img" src={`https://randomuser.me/api/portraits/${user.gender === "male" ? "men" : "women"}/${user.imgNumber}.jpg`} />
+          <img className="round-img" src={`https://randomuser.me/api/portraits/${user.gender === "male" ? "men" : "women"}/${user.imgNumber}.jpg`} alt="" />
           <div style={{ display: "flex" }}>
             <div style={{ marginRight: "30px" }}>
               <p color="textSecondary">Username</p>
@@ -138,7 +139,6 @@ const UserDetails = () => {
             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Facilis distinctio magnam reprehenderit pariatur optio culpa libero odio at odit tempore!
           </p>
           <div className="line"></div>
-          <h2 className="text-primary"></h2>
         </div>
       </div>
 

@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Login from "./Login";
-import { useNavigate, Link } from "react-router-dom";
 
 const UserList = () => {
   const [users, setUsers] = useState([]);
@@ -18,8 +16,6 @@ const UserList = () => {
         console.log(err);
       });
   }, []);
-
-  const navigate = useNavigate();
 
   const addNewUser = () => {
     window.location.href = "/register";
@@ -42,6 +38,7 @@ const UserList = () => {
                 <img
                   className="round-img"
                   src={`https://randomuser.me/api/portraits/${employee.gender === "male" ? "men" : "women"}/${employee.imgNumber}.jpg`}
+                  alt=""
                 />
                 <div className="my-1">
                   {" "}

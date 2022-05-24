@@ -6,14 +6,15 @@ const Header = () => {
   const [signed, setSigned] = useState("");
 
   useEffect(() => {
-    setSigned(localStorage.getItem("username"));
+    const storedAuthToken = localStorage.getItem("username");
+    setSigned(storedAuthToken);
     console.log(signed);
   }, [localStorage]);
 
   const signOut = () => {
     localStorage.removeItem("username");
     localStorage.removeItem("token");
-    window.location.href = "/login";
+    window.location.href = "/";
   };
 
   return (
@@ -22,7 +23,7 @@ const Header = () => {
         <div>
           <a href="/">
             <BsPeopleFill style={{ fontSize: "2rem", marginRight: "0.3rem" }} />
-            Employee registry App
+            Employee register App
           </a>
 
           <small color="textSecondary">hello {signed}</small>

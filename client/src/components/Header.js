@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 
 import { BsPeopleFill } from "react-icons/bs";
 
 const Header = () => {
-  const [signed, setSigned] = useState(localStorage.getItem("username"));
+  const [signed] = useState(localStorage.getItem("username"));
 
   const signOut = () => {
     localStorage.removeItem("username");
@@ -12,9 +11,6 @@ const Header = () => {
     window.location.href = "/login";
   };
 
-  const gotoDash = () => {
-    window.location.href = "/";
-  };
   return (
     <div className="header">
       <nav className="navbar bg-dark">
@@ -33,12 +29,10 @@ const Header = () => {
         {signed && (
           <ul>
             <li>
-              {" "}
-              <a onClick={gotoDash}>Go to Dashboard</a>
+              <a href="/">Go to Dashboard</a>
             </li>
             <li>
-              {" "}
-              <a color="default" onClick={signOut}>
+              <a href="login" color="default" onClick={signOut}>
                 Sign out
               </a>
             </li>

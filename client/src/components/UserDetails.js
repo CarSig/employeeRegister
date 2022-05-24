@@ -44,6 +44,7 @@ const UserDetails = () => {
     e.preventDefault();
 
     axios.put(`/api/users/${getID}`, { user }).then((res) => console.log("updated sucessfully"));
+    toggleReady();
   };
 
   const handleChange = (input) => (e) => {
@@ -73,8 +74,8 @@ const UserDetails = () => {
     window.location.reload();
   };
 
-  const getUser = () => {
-    axios
+  const getUser = async () => {
+    const user = await axios
       .get(`/api/users/${params.id}`)
       .then(async (response) => {
         const data = await response.data;

@@ -1,36 +1,6 @@
 import React from "react";
-import axios from "axios";
 
-const UpdateUser = ({ user, setUser, handleChange, getID, params, updateUserFunc }) => {
-  // update user receives error, there are two tires, once is in parent file passed as pro (updateUSer Function)
-
-  const handleSubmit = (e) => {
-    console.log(22);
-    e.preventDefault();
-
-    const payload = {
-      username: user.username,
-      firstName: user.firstName,
-      lastName: user.lastName,
-      address: user.address,
-      role: user.role,
-      email: user.email,
-      password: user.password,
-    };
-
-    axios({
-      url: `/api/users/${getID}`,
-      method: "post",
-      data: payload,
-    })
-      .then(() => {
-        alert("Updated was succesfully");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
+const UpdateUser = ({ user, handleChange, updateUserFunc }) => {
   return (
     <div>
       <form className="form" onSubmit={updateUserFunc}>

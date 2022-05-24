@@ -28,5 +28,5 @@ All comments about some user are displayed on his/ her page
 
 # TODO:
 
--responsive design
+-responsiveness
 -Add error messages when for registration is used already taken username/ account .

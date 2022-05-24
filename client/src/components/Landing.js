@@ -6,7 +6,7 @@ const Landing = () => {
       <div className="dark-overlay">
         <div className="landing-inner">
           <h1 className="x-large">Employee Registry</h1>
-          <p className="lead">Create employee profile and comment others</p>
+          <p className="lead">Create employee profile and comment </p>
           <div className="buttons">
             <a href="/register" className="btn btn-primary">
               Sign up

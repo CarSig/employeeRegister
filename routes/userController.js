@@ -1,6 +1,5 @@
 const User = require("../models/user");
 const jwt = require("jsonwebtoken");
-const { deleteOne } = require("../models/user");
 
 exports.findOneUser = async (req, res) => {
   console.log("params: ", req.params.id);
@@ -13,11 +12,6 @@ exports.findOneUser = async (req, res) => {
       res.json(data);
     });
 };
-
-// exports.findOneUser = async (req, res) => {
-//   const oneUser = await User.findById(req.params.id);
-//   res.send({ data: oneUser });
-// };
 
 exports.findAllUsers = async (req, res) => {
   await User.find()
@@ -35,7 +29,6 @@ exports.register = async (req, res) => {
   const data = req.body;
   const newUser = new User(data);
 
-  // . save()
   await newUser.save((error) => {
     if (error) {
       res.status(500).json({ msg: "Ooops, something happened with the server" });
@@ -69,16 +62,6 @@ exports.login = async (req, res) => {
   }
 };
 
-// exports.update = (req, res) => {
-//   User.findByIdAndUpdate(req.params.id).exec((error, item) => {
-//     alert(item);
-//     if (error) {
-//       res.send(error);
-//     }
-//     return res.json(item);
-//   });
-// };
-
 exports.deleteUser = (req, res) => {
   User.findByIdAndRemove(req.params.id).exec((error, deletedItem) => {
     if (error) {
@@ -89,8 +72,6 @@ exports.deleteUser = (req, res) => {
 };
 
 exports.update = async (req, res) => {
-  //mb req.body.id
-
   User.findByIdAndUpdate(req.params.id, req.body.user, { new: true }, (error, updatedData) => {
     if (error) {
       console.log("error" + error);

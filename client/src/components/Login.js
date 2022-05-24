@@ -6,12 +6,11 @@ import { FiLogIn } from "react-icons/fi";
 import axios from "axios";
 
 const Login = () => {
-  const [values, setValues] = useState({ username: "", email: "", password: "" });
+  const [values, setValues] = useState({ username: "", password: "" });
   const [invalidCredentials, setInvalidCredentials] = useState(false);
 
   const handleChange = (input) => (e) => {
     setValues({ ...values, [input]: e.target.value });
-    console.log(values);
   };
 
   const loginUser = async (e) => {
@@ -19,7 +18,6 @@ const Login = () => {
 
     const payload = {
       username: values.username,
-
       password: values.password,
     };
 
@@ -30,20 +28,17 @@ const Login = () => {
     });
 
     const data = await response;
-    console.log(data);
 
     // AUTHENTICATION 2
     if (data.data.user) {
       localStorage.setItem("token", data.data.user);
       localStorage.setItem("username", payload.username);
-      console.log(data.data.user);
 
       setInvalidCredentials(false);
       window.location.href = "/";
     } else {
       setInvalidCredentials(true);
     }
-    ///
   };
 
   return (

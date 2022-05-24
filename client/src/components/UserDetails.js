@@ -94,7 +94,6 @@ const UserDetails = () => {
       .then((response) => {
         const data = response.data;
         setPosts(data);
-        console.log(data);
       })
       .catch(() => {
         alert("Error retrieving data!");

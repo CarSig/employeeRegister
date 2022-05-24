@@ -1,9 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { BsPeopleFill } from "react-icons/bs";
 
 const Header = () => {
-  const [signed] = useState(localStorage.getItem("username"));
+  const [signed, setSigned] = useState("");
+
+  useEffect(() => {
+    setSigned(localStorage.getItem("username"));
+    console.log(signed);
+  }, [localStorage]);
 
   const signOut = () => {
     localStorage.removeItem("username");

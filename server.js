@@ -1,5 +1,4 @@
 require("dotenv").config({ path: "C:/Users/Lovro/Documents/Projects/employeeRegister/.env" });
-// import npm packages
 
 const express = require("express");
 const mongoose = require("mongoose");

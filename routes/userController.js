@@ -1,5 +1,6 @@
 const User = require("../models/user");
 const jwt = require("jsonwebtoken");
+const argon2 = require("argon2");
 
 exports.findOneUser = async (req, res) => {
   console.log("params: ", req.params.id);
@@ -25,8 +26,9 @@ exports.findAllUsers = async (req, res) => {
 };
 
 exports.register = async (req, res) => {
-  console.log("Body: ", req.body);
+  console.log("Body: ", {...req.body, password: '***'});
   const data = req.body;
+  data.password = await argon2.hash(data.password);
   const newUser = new User(data);
 
   await newUser.save((error) => {
@@ -40,14 +42,19 @@ exports.register = async (req, res) => {
 };
 
 exports.login = async (req, res) => {
-  const user = await User.findOne({
-    username: req.body.username,
-    password: req.body.password,
-  });
+  const { username, password } = req.body;
+  const user = await User.findOne({ username });
 
-  // AUUTHORIZATION 1:)
-
-  if (user) {
+  try {
+    if(!user) {
+      throw new Error(`user ${username} not found`);
+    }
+    const passwordVerified = await argon2.verify(user.password, password);
+    if(!passwordVerified) {
+      throw new Error(`password of user ${username} incorrect`);
+    }
+    
+    // AUTHORIZATION 1:)
     const token = jwt.sign(
       {
         username: user.username,
@@ -57,8 +64,9 @@ exports.login = async (req, res) => {
     );
 
     return res.json({ status: "ok", user: token });
-  } else {
-    return res.json({ status: "error", user: false });
+  } catch(err) {
+    console.error(err);
+    return res.status(400).json({ status: "error" });
   }
 };
 
@@ -72,6 +80,9 @@ exports.deleteUser = (req, res) => {
 };
 
 exports.update = async (req, res) => {
+  if(req.body.user.password) {
+    req.body.user.password = await argon2.hash(req.body.user.password);
+  } 
   User.findByIdAndUpdate(req.params.id, req.body.user, { new: true }, (error, updatedData) => {
     if (error) {
       console.log("error" + error);

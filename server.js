@@ -1,4 +1,4 @@
-require("dotenv").config({ path: "C:/Users/Lovro/Documents/Projects/employeeRegister/.env" });
+require("dotenv").config();
 
 const express = require("express");
 const mongoose = require("mongoose");
